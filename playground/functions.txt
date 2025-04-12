@@ -1,0 +1,7 @@
+fn hi(msg){
+    console.log(msg)
+}
+
+fn main(){
+    hi("Hello, world!")
+}

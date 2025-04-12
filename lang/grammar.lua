@@ -34,9 +34,10 @@ local function parseArgs(parser,typed)
         while parser.curr.t~="RightParen" do
             parser:consume("Id")
             local name = parser.prev.val
-            parser:consume("Colon")
-            parser:consume("Id")
-            table.insert(args,{name=name,t=parser.prev.val})
+            --parser:consume("Colon")
+            --parser:consume("Id")
+            --table.insert(args,{name=name,t=parser.prev.val})
+            table.insert(args,{name=name,t="Any"})
             if parser.curr.t~="RightParen" then
                 parser:consume("Comma")
             end
