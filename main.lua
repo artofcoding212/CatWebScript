@@ -32,3 +32,4 @@ if file == nil then
     error("\nunable to write to JSON file:\n"..json)
 end
 file:write(json)
+file:close()

@@ -316,6 +316,20 @@ function Ir:genNode(node, dst)
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="0"},
                     {t="opcode",val=Opcode.End}
                 )
+            elseif node.value.op == "And" then
+                self:output(
+                    {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="0"},
+                    {t="opcode",val=Opcode.IfAnd},{t="string",val="l"},{t="string",val="r"},
+                    {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="1"},
+                    {t="opcode",val=Opcode.End}
+                )
+            elseif node.value.op == "Or" then
+                self:output(
+                    {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="0"},
+                    {t="opcode",val=Opcode.IfOr},{t="string",val="l"},{t="string",val="r"},
+                    {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="1"},
+                    {t="opcode",val=Opcode.End}
+                )
             else
                 self:output(
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="0"},
@@ -439,6 +453,26 @@ function Ir:compile()
         [Opcode.IfEquals]=function()
             local a,b = table.remove(self.out,1),table.remove(self.out,1)
             action.text = {"If", {value=a.val,l="any",t=a.t}, "is equal to", {value=b.val,t=b.t}}
+        end,
+        [Opcode.IfNotEquals]=function()
+            local a,b = table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"If", {value=a.val,l="any",t=a.t}, "is not equal to", {value=b.val,t=b.t}}
+        end,
+        [Opcode.IfGreater]=function()
+            local a,b = table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"If", {value=a.val,l="any",t=a.t}, "is greater than", {value=b.val,t=b.t}}
+        end,
+        [Opcode.IfLower]=function()
+            local a,b = table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"If", {value=a.val,l="any",t=a.t}, "is lower than", {value=b.val,t=b.t}}
+        end,
+        [Opcode.IfAnd]=function()
+            local a,b = table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"If", {value=a.val,l="variable",t=a.t}, "AND", {value=b.val,t=b.t}}
+        end,
+        [Opcode.IfOr]=function()
+            local a,b = table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"If", {value=a.val,l="variable",t=a.t}, "OR", {value=b.val,t=b.t}}
         end,
         [Opcode.DefineFunction]=function()
             local name = table.remove(self.out,1).val
