@@ -127,14 +127,13 @@ _G.Opcode = Opcode
 --- @alias IrNodeType "opcode"|"object"|"any"|"number"|"string"
 --- @alias IrNode {t:IrNodeType, val:string}
 
-local generateStart = 65
+local generateStart = 10
 
 --- @class Ir
 --- @field ast AstNode[]
 --- @field out IrNode[]
 --- @field variableLu table<string, {alternate: string, t:string}>
---- @field lastGen number[]
---- @field lastGenIdx number
+--- @field lastGen number
 local Ir = {}
 Ir.__index = Ir
 
@@ -146,7 +145,7 @@ function Ir.new(ast)
         ast=ast,
         out={},
         variableLu={},
-        lastGen={generateStart}, lastGenIdx=generateStart,
+        lastGen=generateStart,
     }, Ir)
 end
 
@@ -182,16 +181,10 @@ local typeConvert = {
 --- @param t string
 --- Define the variable "id" with the type "t". Coerces "id" into a tagging-avoidable string.
 function Ir:makeId(id,t)
-    self.lastGenIdx = self.lastGenIdx+1
-    if self.lastGenIdx > 90 then
-        self.lastGenIdx = generateStart
-        table.insert(self.lastGen, 90)
-    else
-        self.lastGen[#self.lastGen]=self.lastGenIdx
-    end
+    self.lastGen = self.lastGen+1
     ---@diagnostic disable-next-line: deprecated
     --self.variableLu[id] = {alternate=string.char(unpack(self.lastGen)),t=t}
-    self.variableLu[id] = {alternate=tostring(self.lastGen[1]),t=t}
+    self.variableLu[id] = {alternate=tostring(self.lastGen),t=t}
 end
 
 --- @param id string
