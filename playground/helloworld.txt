@@ -1,0 +1,11 @@
+fn main(){
+    a = 1
+    b = 1
+    if a==b {
+        console.log("Hello, world!")
+    } else if a==b {
+        console.log("This also shouldn't print.")
+    } else {
+        console.log("This shouldn't print.")
+    }
+}

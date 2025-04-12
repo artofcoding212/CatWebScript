@@ -1,0 +1,1768 @@
+[
+    {
+        "enabled": "false",
+        "class": "script",
+        "content": [
+            {
+                "y": "6420",
+                "x": "5586",
+                "globalid": "9c",
+                "id": "5",
+                "text": [
+                    "When mouse leaves",
+                    {
+                        "value": "bw",
+                        "t": "object"
+                    },
+                    "..."
+                ],
+                "actions": [],
+                "width": "350"
+            },
+            {
+                "y": "6713",
+                "x": "5422",
+                "globalid": "NG",
+                "id": "7",
+                "text": [
+                    "When",
+                    {
+                        "value": "Page",
+                        "l": "donation",
+                        "t": "object"
+                    },
+                    "bought..."
+                ],
+                "actions": [],
+                "width": "350"
+            },
+            {
+                "y": "6771",
+                "x": "5007",
+                "globalid": "=w",
+                "id": "4",
+                "text": [
+                    "When message received..."
+                ],
+                "actions": [],
+                "width": "350"
+            },
+            {
+                "y": "4616.5",
+                "x": "4499.66552734375",
+                "globalid": "S&",
+                "id": "0",
+                "text": [
+                    "When website loaded..."
+                ],
+                "actions": [
+                    {
+                        "id": "0",
+                        "text": [
+                            "Log",
+                            {
+                                "value": "a",
+                                "t": "any"
+                            }
+                        ],
+                        "globalid": "87",
+                        "t": "0"
+                    },
+                    {
+                        "id": "1",
+                        "text": [
+                            "Warn",
+                            {
+                                "value": "b",
+                                "t": "any"
+                            }
+                        ],
+                        "globalid": "}S",
+                        "t": "0"
+                    },
+                    {
+                        "id": "2",
+                        "text": [
+                            "Error",
+                            {
+                                "value": "c",
+                                "t": "any"
+                            }
+                        ],
+                        "globalid": "sa",
+                        "t": "0"
+                    },
+                    {
+                        "id": "3",
+                        "text": [
+                            "Wait",
+                            {
+                                "value": "1",
+                                "t": "number"
+                            },
+                            "seconds"
+                        ],
+                        "globalid": "pb",
+                        "t": "0"
+                    },
+                    {
+                        "id": "18",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            },
+                            "is equal to",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "]S",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "1o",
+                        "t": "0"
+                    },
+                    {
+                        "id": "19",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            },
+                            "is not equal to",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "{\\",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "~r",
+                        "t": "0"
+                    },
+                    {
+                        "id": "20",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            },
+                            "is greater than",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "XF",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "V(",
+                        "t": "0"
+                    },
+                    {
+                        "id": "21",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            },
+                            "is lower than",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "QP",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "A}",
+                        "t": "0"
+                    },
+                    {
+                        "id": "37",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            },
+                            "contains",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "&p",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "c@",
+                        "t": "0"
+                    },
+                    {
+                        "id": "38",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            },
+                            "doesn't contain",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "*r",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "6S",
+                        "t": "0"
+                    },
+                    {
+                        "id": "92",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "exists"
+                        ],
+                        "globalid": "[~",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "1n",
+                        "t": "0"
+                    },
+                    {
+                        "id": "93",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "doesn't exist"
+                        ],
+                        "globalid": "Bp",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": ".s",
+                        "t": "0"
+                    },
+                    {
+                        "id": "44",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "AND",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "l4",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "09",
+                        "t": "0"
+                    },
+                    {
+                        "id": "45",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "OR",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "j9",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "im",
+                        "t": "0"
+                    },
+                    {
+                        "id": "46",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "NOR",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "vv",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "gA",
+                        "t": "0"
+                    },
+                    {
+                        "id": "47",
+                        "text": [
+                            "If",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "XOR",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "2q",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "/}",
+                        "t": "0"
+                    },
+                    {
+                        "id": "22",
+                        "text": [
+                            "Repeat",
+                            {
+                                "value": "1",
+                                "t": "number"
+                            },
+                            "times"
+                        ],
+                        "globalid": "S|",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": ":Z",
+                        "t": "0"
+                    },
+                    {
+                        "id": "23",
+                        "text": [
+                            "Repeat forever"
+                        ],
+                        "globalid": "'Z",
+                        "t": "0"
+                    },
+                    {
+                        "id": "24",
+                        "text": [
+                            "Break"
+                        ],
+                        "globalid": "Y ",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "<L",
+                        "t": "0"
+                    },
+                    {
+                        "id": "8",
+                        "text": [
+                            "Make",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            },
+                            "invisible"
+                        ],
+                        "globalid": "b^",
+                        "t": "0"
+                    },
+                    {
+                        "id": "9",
+                        "text": [
+                            "Make",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            },
+                            "visible"
+                        ],
+                        "globalid": "jb",
+                        "t": "0"
+                    },
+                    {
+                        "id": "10",
+                        "text": [
+                            "Set",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            },
+                            "text to",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "(Q",
+                        "t": "0"
+                    },
+                    {
+                        "id": "31",
+                        "text": [
+                            "Set",
+                            {
+                                "value": "asdf",
+                                "l": "property",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            },
+                            "to",
+                            {
+                                "value": "a",
+                                "t": "any"
+                            }
+                        ],
+                        "globalid": "Bf",
+                        "t": "0"
+                    },
+                    {
+                        "id": "39",
+                        "text": [
+                            "Get",
+                            {
+                                "value": "asdf",
+                                "l": "property",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            },
+                            "→",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "jZ",
+                        "t": "0"
+                    },
+                    {
+                        "id": "50",
+                        "text": [
+                            "Delete",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            }
+                        ],
+                        "globalid": "L/",
+                        "t": "0"
+                    },
+                    {
+                        "id": "58",
+                        "text": [
+                            "Parent",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            },
+                            "to",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            }
+                        ],
+                        "globalid": "iH",
+                        "t": "0"
+                    },
+                    {
+                        "id": "88",
+                        "text": [
+                            "Tween",
+                            {
+                                "value": "sadf",
+                                "t": "string",
+                                "l": "property"
+                            },
+                            "of",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            },
+                            "to",
+                            {
+                                "value": "sadf",
+                                "t": "any"
+                            },
+                            "-",
+                            {
+                                "value": "1",
+                                "t": "number",
+                                "l": "time"
+                            },
+                            {
+                                "value": "test",
+                                "t": "string",
+                                "l": "style"
+                            },
+                            {
+                                "value": "adsf",
+                                "t": "string",
+                                "l": "direction"
+                            }
+                        ],
+                        "globalid": ">B",
+                        "t": "0"
+                    },
+                    {
+                        "id": "4",
+                        "text": [
+                            "Redirect to",
+                            {
+                                "value": "test",
+                                "t": "string",
+                                "href": "true"
+                            }
+                        ],
+                        "globalid": "T6",
+                        "t": "0"
+                    },
+                    {
+                        "id": "67",
+                        "text": [
+                            "Get query string parameter",
+                            {
+                                "value": "test",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "gfds",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "MP",
+                        "t": "0"
+                    },
+                    {
+                        "id": "5",
+                        "text": [
+                            "Play audio",
+                            {
+                                "value": "5t4325",
+                                "l": "id",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "test",
+                                "l": "variable?",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "0:",
+                        "t": "0"
+                    },
+                    {
+                        "id": "26",
+                        "text": [
+                            "Play looped audio",
+                            {
+                                "value": "54235",
+                                "l": "id",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "a",
+                                "l": "variable?",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "T]",
+                        "t": "0"
+                    },
+                    {
+                        "id": "73",
+                        "text": [
+                            "Set volume of",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "to",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "k=",
+                        "t": "0"
+                    },
+                    {
+                        "id": "77",
+                        "text": [
+                            "Set speed of",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "to",
+                            {
+                                "value": "10",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "%`",
+                        "t": "0"
+                    },
+                    {
+                        "id": "94",
+                        "text": [
+                            "Set",
+                            {
+                                "value": "v",
+                                "l": "property",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "to",
+                            {
+                                "value": "5",
+                                "t": "any"
+                            }
+                        ],
+                        "globalid": "Y_",
+                        "t": "0"
+                    },
+                    {
+                        "id": "95",
+                        "text": [
+                            "Get",
+                            {
+                                "value": "v",
+                                "l": "property",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "#8",
+                        "t": "0"
+                    },
+                    {
+                        "id": "74",
+                        "text": [
+                            "Stop audio",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "V3",
+                        "t": "0"
+                    },
+                    {
+                        "id": "76",
+                        "text": [
+                            "Resume audio",
+                            {
+                                "value": "dfgj",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": ";V",
+                        "t": "0"
+                    },
+                    {
+                        "id": "7",
+                        "text": [
+                            "Stop all audio"
+                        ],
+                        "globalid": "S)",
+                        "t": "0"
+                    },
+                    {
+                        "id": "11",
+                        "text": [
+                            "Set variable",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "to",
+                            {
+                                "value": "3",
+                                "l": "any",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "]<",
+                        "t": "0"
+                    },
+                    {
+                        "id": "12",
+                        "text": [
+                            "Increase",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "by",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "+f",
+                        "t": "0"
+                    },
+                    {
+                        "id": "13",
+                        "text": [
+                            "Subtract",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "by",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "0|",
+                        "t": "0"
+                    },
+                    {
+                        "id": "14",
+                        "text": [
+                            "Multiply",
+                            {
+                                "value": "b",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "by",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": ">!",
+                        "t": "0"
+                    },
+                    {
+                        "id": "14",
+                        "text": [
+                            "Multiply",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "by",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "Yt",
+                        "t": "0"
+                    },
+                    {
+                        "id": "15",
+                        "text": [
+                            "Divide",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "by",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "9J",
+                        "t": "0"
+                    },
+                    {
+                        "id": "40",
+                        "text": [
+                            "Raise",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "to the power of",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "RW",
+                        "t": "0"
+                    },
+                    {
+                        "id": "41",
+                        "text": [
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "modulo",
+                            {
+                                "value": "3",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": ")Y",
+                        "t": "0"
+                    }
+                ],
+                "width": "578"
+            },
+            {
+                "y": "6275",
+                "x": "5202",
+                "globalid": "!l",
+                "id": "1",
+                "text": [
+                    "When",
+                    {
+                        "value": "bw",
+                        "l": "button",
+                        "t": "object"
+                    },
+                    "pressed..."
+                ],
+                "actions": [],
+                "width": "350"
+            },
+            {
+                "y": "6505",
+                "x": "5116",
+                "globalid": "xo",
+                "id": "3",
+                "text": [
+                    "When mouse enters",
+                    {
+                        "value": "bw",
+                        "t": "object"
+                    },
+                    "..."
+                ],
+                "actions": [],
+                "width": "350"
+            },
+            {
+                "y": "6348",
+                "x": "4400",
+                "globalid": ")g",
+                "id": "2",
+                "text": [
+                    "When",
+                    {
+                        "value": "F",
+                        "t": "key"
+                    },
+                    "pressed..."
+                ],
+                "actions": [
+                    {
+                        "id": "16",
+                        "text": [
+                            "Round",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "nZ",
+                        "t": "0"
+                    },
+                    {
+                        "id": "17",
+                        "text": [
+                            "Floor",
+                            {
+                                "value": "a'",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "'u",
+                        "t": "0"
+                    },
+                    {
+                        "id": "78",
+                        "text": [
+                            "Ceil",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "H7",
+                        "t": "0"
+                    },
+                    {
+                        "id": "96",
+                        "text": [
+                            "Delete variable",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "x)",
+                        "t": "0"
+                    },
+                    {
+                        "id": "86",
+                        "text": [
+                            "Run math function",
+                            {
+                                "value": "test",
+                                "l": "function",
+                                "t": "string"
+                            },
+                            {
+                                "value": "foo",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "^5",
+                        "t": "0"
+                    },
+                    {
+                        "id": "27",
+                        "text": [
+                            "Set",
+                            {
+                                "value": "a",
+                                "l": "var",
+                                "t": "string"
+                            },
+                            "to random",
+                            {
+                                "value": "1",
+                                "l": "n",
+                                "t": "number"
+                            },
+                            "-",
+                            {
+                                "value": "100",
+                                "l": "n",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "-Y",
+                        "t": "0"
+                    },
+                    {
+                        "id": "32",
+                        "text": [
+                            "Broadcast",
+                            {
+                                "value": "a",
+                                "l": "message",
+                                "t": "string"
+                            },
+                            "across page"
+                        ],
+                        "globalid": "Kx",
+                        "t": "0"
+                    },
+                    {
+                        "id": "33",
+                        "text": [
+                            "Broadcast",
+                            {
+                                "value": "a",
+                                "l": "message",
+                                "t": "string"
+                            },
+                            "across site"
+                        ],
+                        "globalid": "'s",
+                        "t": "0"
+                    },
+                    {
+                        "id": "51",
+                        "text": [
+                            "Get local username →",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "a3",
+                        "t": "0"
+                    },
+                    {
+                        "id": "52",
+                        "text": [
+                            "Get local user ID →",
+                            {
+                                "value": "b",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "D%",
+                        "t": "0"
+                    },
+                    {
+                        "id": "68",
+                        "text": [
+                            "Get unix timestamp →",
+                            {
+                                "value": "aa",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "!*",
+                        "t": "0"
+                    },
+                    {
+                        "id": "83",
+                        "text": [
+                            "Get tick →",
+                            {
+                                "value": "t",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "+.",
+                        "t": "0"
+                    },
+                    {
+                        "id": "71",
+                        "text": [
+                            "Format current date/time",
+                            {
+                                "value": "ll",
+                                "l": "format",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "Uc",
+                        "t": "0"
+                    },
+                    {
+                        "id": "72",
+                        "text": [
+                            "Format from unix",
+                            {
+                                "value": "542",
+                                "t": "number"
+                            },
+                            {
+                                "value": "test",
+                                "l": "format",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "-#",
+                        "t": "0"
+                    },
+                    {
+                        "id": "79",
+                        "text": [
+                            "If left mouse button down"
+                        ],
+                        "globalid": "'t",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "BM",
+                        "t": "0"
+                    },
+                    {
+                        "id": "80",
+                        "text": [
+                            "If middle mouse button down"
+                        ],
+                        "globalid": "$i",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "@*",
+                        "t": "0"
+                    },
+                    {
+                        "id": "81",
+                        "text": [
+                            "If right mouse button down"
+                        ],
+                        "globalid": "Co",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "UO",
+                        "t": "0"
+                    },
+                    {
+                        "id": "82",
+                        "text": [
+                            "If",
+                            {
+                                "value": "F",
+                                "t": "key"
+                            },
+                            "down"
+                        ],
+                        "globalid": "\\u",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "Iq",
+                        "t": "0"
+                    },
+                    {
+                        "id": "84",
+                        "text": [
+                            "Get viewport size →",
+                            {
+                                "value": "x",
+                                "l": "x",
+                                "t": "string"
+                            },
+                            {
+                                "value": "y",
+                                "l": "y",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": " -",
+                        "t": "0"
+                    },
+                    {
+                        "id": "85",
+                        "text": [
+                            "Get cursor position →",
+                            {
+                                "value": "x",
+                                "l": "x",
+                                "t": "string"
+                            },
+                            {
+                                "value": "y",
+                                "l": "y",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "HX",
+                        "t": "0"
+                    },
+                    {
+                        "id": "34",
+                        "text": [
+                            "Set",
+                            {
+                                "value": "a",
+                                "l": "cookie",
+                                "t": "string"
+                            },
+                            "to",
+                            {
+                                "value": "3",
+                                "t": "any"
+                            }
+                        ],
+                        "globalid": "\\<",
+                        "t": "0"
+                    },
+                    {
+                        "id": "35",
+                        "text": [
+                            "Increase",
+                            {
+                                "value": "a",
+                                "l": "cookie",
+                                "t": "string"
+                            },
+                            "by",
+                            {
+                                "value": "4",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "!U",
+                        "t": "0"
+                    },
+                    {
+                        "id": "36",
+                        "text": [
+                            "Get cookie",
+                            {
+                                "value": "a",
+                                "l": "cookie",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "p:",
+                        "t": "0"
+                    },
+                    {
+                        "id": "62",
+                        "text": [
+                            "Delete cookie",
+                            {
+                                "value": "a",
+                                "l": "cookie",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "~!",
+                        "t": "0"
+                    },
+                    {
+                        "id": "42",
+                        "text": [
+                            "Sub",
+                            {
+                                "value": "test",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            {
+                                "value": "1",
+                                "l": "start",
+                                "t": "number"
+                            },
+                            "-",
+                            {
+                                "value": "1",
+                                "l": "end",
+                                "t": "number"
+                            }
+                        ],
+                        "globalid": "ao",
+                        "t": "0"
+                    },
+                    {
+                        "id": "43",
+                        "text": [
+                            "Replace",
+                            {
+                                "value": "s",
+                                "t": "string"
+                            },
+                            "in",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            },
+                            "by",
+                            {
+                                "value": "test",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "er",
+                        "t": "0"
+                    },
+                    {
+                        "id": "48",
+                        "text": [
+                            "Get length of",
+                            {
+                                "value": "test",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "w>",
+                        "t": "0"
+                    },
+                    {
+                        "id": "48",
+                        "text": [
+                            "Get length of",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "b",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": ")4",
+                        "t": "0"
+                    },
+                    {
+                        "id": "57",
+                        "text": [
+                            "Split string",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            },
+                            {
+                                "value": "a",
+                                "l": "separator",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "test",
+                                "l": "table",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "Qm",
+                        "t": "0"
+                    },
+                    {
+                        "id": "69",
+                        "text": [
+                            "Lower",
+                            {
+                                "value": "a",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "b",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "1\\",
+                        "t": "0"
+                    },
+                    {
+                        "id": "70",
+                        "text": [
+                            "Upper",
+                            {
+                                "value": "b",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "A ",
+                        "t": "0"
+                    },
+                    {
+                        "id": "54",
+                        "text": [
+                            "Create table",
+                            {
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "*@",
+                        "t": "0"
+                    },
+                    {
+                        "id": "55",
+                        "text": [
+                            "Set entry",
+                            {
+                                "l": "entry",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "a",
+                                "l": "table",
+                                "t": "string"
+                            },
+                            "to",
+                            {
+                                "value": "a",
+                                "l": "any",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "mM",
+                        "t": "0"
+                    },
+                    {
+                        "id": "66",
+                        "text": [
+                            "Set entry",
+                            {
+                                "l": "entry",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "b",
+                                "l": "table",
+                                "t": "string"
+                            },
+                            "to",
+                            {
+                                "value": "Page",
+                                "t": "object"
+                            }
+                        ],
+                        "globalid": "kz",
+                        "t": "0"
+                    },
+                    {
+                        "id": "56",
+                        "text": [
+                            "Get entry",
+                            {
+                                "l": "entry",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "c",
+                                "l": "table",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "as",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "hi",
+                        "t": "0"
+                    },
+                    {
+                        "id": "90",
+                        "text": [
+                            "Delete entry",
+                            {
+                                "l": "entry",
+                                "t": "string"
+                            },
+                            "of",
+                            {
+                                "value": "<d>",
+                                "l": "table",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "Dq",
+                        "t": "0"
+                    },
+                    {
+                        "id": "89",
+                        "text": [
+                            "Insert",
+                            {
+                                "l": "any",
+                                "t": "string"
+                            },
+                            "at position",
+                            {
+                                "l": "number?",
+                                "t": "number"
+                            },
+                            "of",
+                            {
+                                "value": "<a>",
+                                "l": "array",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": ":O",
+                        "t": "0"
+                    },
+                    {
+                        "id": "91",
+                        "text": [
+                            "Remove entry at position",
+                            {
+                                "value": "5",
+                                "l": "number?",
+                                "t": "number"
+                            },
+                            "of",
+                            {
+                                "value": "###",
+                                "l": "array",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "~>",
+                        "t": "0"
+                    },
+                    {
+                        "id": "59",
+                        "text": [
+                            "Get length of",
+                            {
+                                "value": "<test>",
+                                "l": "table",
+                                "t": "string"
+                            },
+                            "→",
+                            {
+                                "value": "a",
+                                "l": "variable",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": ".C",
+                        "t": "0"
+                    },
+                    {
+                        "id": "61",
+                        "text": [
+                            "Iterate through",
+                            {
+                                "value": "<test>",
+                                "l": "table",
+                                "t": "string"
+                            },
+                            "({index},{value})"
+                        ],
+                        "globalid": "y\\",
+                        "t": "0"
+                    },
+                    {
+                        "id": "25",
+                        "text": [
+                            "end"
+                        ],
+                        "globalid": "^K",
+                        "t": "0"
+                    },
+                    {
+                        "id": "63",
+                        "text": [
+                            "Run function",
+                            {
+                                "value": "<hi>",
+                                "l": "function",
+                                "t": "string"
+                            }
+                        ],
+                        "globalid": "uK",
+                        "t": "0"
+                    },
+                    {
+                        "id": "87",
+                        "text": [
+                            "Run function",
+                            {
+                                "value": "<hi>",
+                                "l": "function",
+                                "t": "string"
+                            },
+                            "and wait"
+                        ],
+                        "globalid": "\\|",
+                        "t": "0"
+                    }
+                ],
+                "width": "483"
+            },
+            {
+                "y": "8084",
+                "x": "4997",
+                "globalid": ">p",
+                "id": "6",
+                "text": [
+                    "Define function",
+                    {
+                        "value": "<hi>",
+                        "l": "function",
+                        "t": "string"
+                    }
+                ],
+                "actions": [],
+                "width": "350"
+            }
+        ],
+        "globalid": "bw"
+    }
+]
