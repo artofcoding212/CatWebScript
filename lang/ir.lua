@@ -218,7 +218,7 @@ function Ir:genNode(node, dst)
         ["Function"]=function()
             self:output({t="opcode",val=Opcode.DefineFunction},{t="string",val=node.value.name=="main" and "main" or self:convertId(node.value.name)})
             for i, arg in ipairs(node.value.args) do
-                self.variableLu[arg.name] = {alternate=string.char(64+i),t=arg.t}
+                self.variableLu[arg.name] = {alternate=tostring(64+i),t=arg.t}
             end
             for _, block in ipairs(node.value.body) do
                 self:genNode(block, "a")
@@ -366,7 +366,7 @@ function Ir:genNode(node, dst)
                 end
             end
             for i, arg in ipairs(node.value.args) do
-                self:genNode(arg,string.char(64+i))
+                self:genNode(arg,tostring(64+i))
             end
             if node.value.left.type=="Id" then
                 self:output({t="opcode",val=Opcode.AwaitFunction},{t="string",val=self:convertId(node.value.left.value)})
