@@ -1,0 +1,16 @@
+fn old(){
+    x = Array(1)
+    x.insert(5)
+    console.log(x[2]) # 5
+    console.log(x.count()) # 2
+    console.log(x.pop()) # 5
+    console.log(x.count()) # 1
+}
+
+fn main(){
+    hi = {
+        Hello: ", world!"
+    }
+
+    console.log(hi.keys()[1]..hi.values()[1])
+}

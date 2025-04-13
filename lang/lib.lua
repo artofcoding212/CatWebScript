@@ -27,7 +27,7 @@ end
 --- @type table<string,function>
 local tests = {
     parsing=function()
-        local p = Parser.new('fn main(){ if x == 2 {} else { 2+2 } }', Grammar)
+        local p = Parser.new('fn main(){ x = { foo: 2 } }', Grammar)
         p:parse()
         dump(p.output)
         print()

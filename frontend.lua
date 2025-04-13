@@ -163,12 +163,20 @@ end
 --- Advance past whitespaces if any.
 function Parser:whitespace()
     while self.currChar==" "  or self.currChar=="\t" or
-          self.currChar=="\r" or self.currChar=="\n"
+          self.currChar=="\r" or self.currChar=="\n" or self.currChar == "#"
     do
+        if self.currChar == "#" then
+            while self.currChar ~= "\n" and self.currChar ~= "\0" do
+                self:singlyAdvance()
+            end
+            self.currLn = self.currLn + 1
+            goto continue
+        end
         if self.currChar=="\n" then
             self.currLn = self.currLn+1
         end
         self:singlyAdvance()
+        ::continue::
     end
 end
 

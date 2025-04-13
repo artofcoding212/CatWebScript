@@ -201,10 +201,16 @@ end
 --[[
 
  IR-Utilized Variable Lookup
- r: Right-hand side of binary expressions
  e: Function return destination
  a: Expression destination
  y: If statement conditional destination
+ x: Computed-member left hand side
+ v: Array() temporary
+ 1: .insert() temporary
+ 2: .pop() temporary
+ 3: Object creation temporary
+ 4: .keys()/.values() temporary
+ 5: Right-hand side of binary expressions
 
 ]]
 
@@ -267,18 +273,24 @@ function Ir:genNode(node, dst)
         end,
         ["Binary"]=function()
             self:genNode(node.value.left, dst)
-            self:genNode(node.value.right, "r")
+            self:genNode(node.value.right, "5")
+            if node.value.op=="DotDot" then
+                self:output({t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="any",val='{'..dst..'}{5}'})
+                return
+            end
             local binRef = {
                 ["Plus"]=Opcode.VarIncrease,
                 ["Minus"]=Opcode.VarDecrease,
                 ["Star"]=Opcode.VarMultiply,
                 ["Slash"]=Opcode.VarDivide,
+                ["Percent"]=Opcode.VarModulo,
+                ["Up"]=Opcode.VarPower,
             }
-            self:output({t="opcode",val=binRef[node.value.op]},{t="string",val=dst},{t="string",val="{r}"})
+            self:output({t="opcode",val=binRef[node.value.op]},{t="string",val=dst},{t="string",val="{5}"})
         end,
         ["Comparison"]=function()
             self:genNode(node.value.left, "l")
-            self:genNode(node.value.right, "r")
+            self:genNode(node.value.right, "5")
             local cmpRef = {
                 ["Greater"]=Opcode.IfGreater,
                 ["Less"]=Opcode.IfLower,
@@ -289,10 +301,10 @@ function Ir:genNode(node, dst)
             }
             if node.value.op == "GreaterEqs" then
                 self:output(
-                    {t="opcode",val=Opcode.IfGreater},{t="string",val="{l}"},{t="string",val="{r}"},
+                    {t="opcode",val=Opcode.IfGreater},{t="string",val="{l}"},{t="string",val="{5}"},
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="1"},
                     {t="opcode",val=Opcode.End},
-                    {t="opcode",val=Opcode.IfEquals},{t="string",val="{l}"},{t="string",val="{r}"},
+                    {t="opcode",val=Opcode.IfEquals},{t="string",val="{l}"},{t="string",val="{5}"},
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="1"},
                     {t="opcode",val=Opcode.End},
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="0"},
@@ -300,10 +312,10 @@ function Ir:genNode(node, dst)
                 )
             elseif node.value.op == "LessEqs" then
                 self:output(
-                    {t="opcode",val=Opcode.IfLower},{t="string",val="{l}"},{t="string",val="{r}"},
+                    {t="opcode",val=Opcode.IfLower},{t="string",val="{l}"},{t="string",val="{5}"},
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="1"},
                     {t="opcode",val=Opcode.End},
-                    {t="opcode",val=Opcode.IfEquals},{t="string",val="{l}"},{t="string",val="{r}"},
+                    {t="opcode",val=Opcode.IfEquals},{t="string",val="{l}"},{t="string",val="{5}"},
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="1"},
                     {t="opcode",val=Opcode.End},
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="0"},
@@ -326,7 +338,7 @@ function Ir:genNode(node, dst)
             else
                 self:output(
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="0"},
-                    {t="opcode",val=cmpRef[node.value.op]},{t="string",val="{l}"},{t="string",val="{r}"},
+                    {t="opcode",val=cmpRef[node.value.op]},{t="string",val="{l}"},{t="string",val="{5}"},
                     {t="opcode",val=Opcode.VarSet},{t="string",val=dst},{t="number",val="1"},
                     {t="opcode",val=Opcode.End}
                 )
@@ -336,34 +348,146 @@ function Ir:genNode(node, dst)
             self:genNode(node.value.right, dst)
             self:output({t="opcode",val=Opcode.VarSet},{t="string",val=self:convertId(node.value.name)},{t="any",val='{'..dst..'}'})
         end,
+        ["Member"]=function()
+            self:error("finding children of objects is currently unsupported; it will be implemented once CatWeb implements FindFirstChild!")
+        end,
+        ["ComputedMember"]=function()
+            self:genNode(node.value.left,dst)
+            self:genNode(node.value.right,"x")
+            self:output({t="opcode",val=Opcode.TableGet},{t="string",val="{x}",l="entry"},{t="string",val=dst,l="table"},{val=dst,l="variable",t="string"})
+        end,
+        ["Object"]=function()
+            self:output({t="opcode",val=Opcode.TableCreate},{t="string",val=dst})
+            for k, v in pairs(node.value) do
+                self:genNode(v, "3")
+                self:output({t="opcode",val=Opcode.TableSet},{t="string",val=k},{t="string",val=dst},{t="string",val="{3}"})
+            end
+        end,
         ["Call"]=function()
-            --? `console` library
-            if
-                node.value.left.type=="Member" and node.value.left.value.left.type=="Id" and
-                node.value.left.value.left.value == "console" and node.value.left.value.right.type=="Id"
-            then
-                if node.value.left.value.right.value == "log" then
-                    if #node.value.args~=1 then
-                        self:error("console.log(msg: any) takes in only one parameter")
+            if node.value.left.type=="Id" then
+                --? `Array(...any)` util in `table` library
+                if node.value.left.value=="Array" then
+                    self:output({t="opcode",val=Opcode.TableCreate},{val=dst,t="string"})
+                    for _, arg in ipairs(node.value.args) do
+                        self:genNode(arg,"v")
+                        self:output({t="opcode",val=Opcode.TableInsert},{t="string",val="{v}"},{t="number"},{t="string",val=dst})
                     end
-                    self:genNode(node.value.args[1],dst)
-                    self:output({t="opcode",val=Opcode.ConsoleLog},{t="any",val='{'..dst..'}'})
-                    return
-                elseif node.value.left.value.right.value == "warn" then
-                    if #node.value.args~=1 then
-                        self:error("console.warn(msg: any) takes in only one parameter")
-                    end
-                    self:genNode(node.value.args[1],dst)
-                    self:output({t="opcode",val=Opcode.ConsoleWarn},{t="any",val='{'..dst..'}'})
-                    return
-                elseif node.value.left.value.right.value == "error" then
-                    if #node.value.args~=1 then
-                        self:error("console.error(msg: any) takes in only one parameter")
-                    end
-                    self:genNode(node.value.args[1],dst)
-                    self:output({t="opcode",val=Opcode.ConsoleErr},{t="any",val='{'..dst..'}'})
                     return
                 end
+            end
+
+            if node.value.left.type=="Member" then
+               if node.value.left.value.right.type=="Id" then
+                    local cmd = node.value.left.value.right.value
+                    --? `string` library
+                    if cmd == "split" then
+                        if #node.value.args~=1 then
+                            self:error("string.split(splitter: string) takes in only one parameter")
+                        end
+                        self:genNode(node.value.left.value.left,dst)
+                        self:genNode(node.value.args[1],"5")
+                        self:output({t="opcode",val=Opcode.StringSplit},{val='{'..dst..'}',t="string"},{val='{5}',t="string"},{val=dst,t="string"})
+                        return
+                    --? 'table library'
+                    elseif cmd == "insert" then
+                        if #node.value.args>2 or #node.value.args==0 then
+                            self:error("table.insert(element: any, optional position: number?) takes in one or two parameters")
+                        end
+                        self:genNode(node.value.left.value.left,dst)
+                        self:genNode(node.value.args[1],"5")
+                        local y = {t="number"}
+                        if #node.value.args==2 then
+                            self:genNode(node.value.args[2], "1")
+                            y.t,y.val = "string","{1}"
+                        end
+                        self:output({t="opcode",val=Opcode.TableInsert},{t="string",val="{5}"},y,{t="string",val=dst})
+                        return
+                    elseif cmd == "count" then
+                        self:genNode(node.value.left.value.left,dst)
+                        self:output({t="opcode",val=Opcode.TableLength},{t="string",val=dst},{t="string",val=dst})
+                        return
+                    elseif cmd == "remove" then
+                        if #node.value.args>1 then
+                            self:error("table.remove(index: number) takes in one required parameter")
+                        end
+                        self:genNode(node.value.left.value.left,dst)
+                        self:genNode(node.value.args[1], "1")
+                        self:output({t="opcode",val=Opcode.TableRemoveEntry},{t="string",val="{1}"},{t="string",val=dst})
+                        return
+                    elseif cmd == "removeKey" then
+                        if #node.value.args>1 then
+                            self:error("table.removeKey(key: any) takes in one required parameter")
+                        end
+                        self:genNode(node.value.left.value.left,dst)
+                        self:genNode(node.value.args[1], "1")
+                        self:output({t="opcode",val=Opcode.TableDeleteEntry},{t="string",val="{1}"},{t="string",val=dst})
+                        return
+                    elseif cmd == "pop" then
+                        if #node.value.args>0 then
+                            self:error("table.pop() -> any takes in zero parameters")
+                        end
+
+                        self:genNode(node.value.left.value.left,"2")
+                        self:output(
+                            {t="opcode",val=Opcode.TableLength},{t="string",val="2"},{t="string",val="1"},
+                            {t="opcode",val=Opcode.TableGet},{t="string",val="{1}"},{t="string",val="2"},{t="string",val=dst},
+                            {t="opcode",val=Opcode.TableRemoveEntry},{t="string",val="{1}"},{t="string",val="2"}
+                        )
+                        return
+                    elseif cmd == "keys" then
+                        if #node.value.args>0 then
+                            self:error("table.keys() -> array<any> takes in zero parameters")
+                        end
+
+                        self:genNode(node.value.left.value.left,"4")
+                        self:output(
+                            {t="opcode",val=Opcode.TableCreate},{t="string",val=dst},
+                            {t="opcode",val=Opcode.TableIterate},{t="string",val="4"},
+                            {t="opcode",val=Opcode.TableInsert},{t="string",val="{index}"},{t="number"},{t="string",val=dst}
+                        )
+                        self:output({t="opcode",val=Opcode.End})
+                        return
+                    elseif cmd == "values" then
+                        if #node.value.args>0 then
+                            self:error("table.values() -> array<any> takes in zero parameters")
+                        end
+
+                        self:genNode(node.value.left.value.left,"4")
+                        self:output(
+                            {t="opcode",val=Opcode.TableCreate},{t="string",val=dst},
+                            {t="opcode",val=Opcode.TableIterate},{t="string",val="4"},
+                            {t="opcode",val=Opcode.TableInsert},{t="string",val="{value}"},{t="number"},{t="string",val=dst}
+                        )
+                        self:output({t="opcode",val=Opcode.End})
+                        return
+                    end
+
+                    --? `console` library
+                    if node.value.left.value.left.type=="Id" and node.value.left.value.left.value=="console" then
+                        if cmd == "log" then
+                            if #node.value.args~=1 then
+                                self:error("console.log(msg: any) takes in only one parameter")
+                            end
+                            self:genNode(node.value.args[1],dst)
+                            self:output({t="opcode",val=Opcode.ConsoleLog},{t="any",val='{'..dst..'}'})
+                            return
+                        elseif cmd == "warn" then
+                            if #node.value.args~=1 then
+                                self:error("console.warn(msg: any) takes in only one parameter")
+                            end
+                            self:genNode(node.value.args[1],dst)
+                            self:output({t="opcode",val=Opcode.ConsoleWarn},{t="any",val='{'..dst..'}'})
+                            return
+                        elseif cmd == "error" then
+                            if #node.value.args~=1 then
+                                self:error("console.error(msg: any) takes in only one parameter")
+                            end
+                            self:genNode(node.value.args[1],dst)
+                            self:output({t="opcode",val=Opcode.ConsoleErr},{t="any",val='{'..dst..'}'})
+                            return
+                        end
+                    end
+               end
             end
             for i, arg in ipairs(node.value.args) do
                 self:genNode(arg,tostring(64+i))
@@ -439,6 +563,40 @@ function Ir:compile()
         end,
         [Opcode.Repeat]=function()
             action.text = {"Repeat", {value=table.remove(self.out,1).val, t="number"}, "times"}
+        end,
+        [Opcode.StringSplit]=function()
+            local a,sep,b = table.remove(self.out,1),table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"Split string",{value=a.val,t=a.t,l="string"},{value=sep.val,t=sep.t,l="string"},"->",{value=b.val,t=b.t,l="table"}}
+        end,
+        [Opcode.TableInsert]=function()
+            local a,b,dst = table.remove(self.out,1),table.remove(self.out,1),table.remove(self.out,1)
+            local x = {l="number?",t="number"}
+            if b.val~=nil then
+                x.value = b.val
+            end
+            action.text = {"Insert", {l="any",t=a.t,value=a.val}, "at position", x, "of", {l="array",value=dst.val,t=dst.t}}
+        end,
+        [Opcode.TableRemoveEntry]=function()
+            local a,b = table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"Remove entry at position",{l="number?",t=a.t,value=a.val},"of",{value=b.val,t=b.t,l="array"}}
+        end,
+        [Opcode.TableLength]=function()
+            local a,b = table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"Get length of",{value=a.val,t=a.t,l="table"},"->",{value=b.val,t=b.t,l="variable"}}
+        end,
+        [Opcode.TableCreate]=function()
+            action.text = {"Create table",{l="variable",t="string",value=table.remove(self.out,1).val}}
+        end,
+        [Opcode.TableGet]=function()
+            local a,b,out = table.remove(self.out,1),table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"Get entry",{l="entry",t=a.t,value=a.val},"of",{l="table",value=b.val,t=b.t},"->",{l="variable",t=out.t,value=out.val}}
+        end,
+        [Opcode.TableSet]=function()
+            local a,b,new = table.remove(self.out,1),table.remove(self.out,1),table.remove(self.out,1)
+            action.text = {"Set entry",{l="entry",t=a.t,value=a.val},"of",{l="table",value=b.val,t=b.t},"to",{l="any",t=new.t,value=new.val}}
+        end,
+        [Opcode.TableIterate]=function()
+            action.text = {"Iterate through",{value=table.remove(self.out,1).val,l="table",t="string"},"({index},{value})"}
         end,
         [Opcode.End]=function()
             action.text = {"end"}
@@ -518,6 +676,16 @@ function Ir:compile()
             local dst = table.remove(self.out,1)
             local src = table.remove(self.out,1)
             action.text = {"Divide", {value=dst.val,t=dst.t,l="variable"}, "by", {l="number",t=src.t,value=src.val}}
+        end,
+        [Opcode.VarPower]=function()
+            local dst = table.remove(self.out,1)
+            local src = table.remove(self.out,1)
+            action.text = {"Raise", {value=dst.val,t=dst.t,l="variable"}, "to the power of", {l="number",t=src.t,value=src.val}}
+        end,
+        [Opcode.VarModulo]=function()
+            local dst = table.remove(self.out,1)
+            local src = table.remove(self.out,1)
+            action.text = {{value=dst.val,t=dst.t,l="variable"}, "modulo", {l="number",t=src.t,value=src.val}}
         end,
         [Opcode.ConsoleLog]=function()
             local src = table.remove(self.out,1)

@@ -5,13 +5,18 @@ grammar:newToken("+","Plus")
 grammar:newToken("-","Minus")
 grammar:newToken("*","Star")
 grammar:newToken("/","Slash")
+grammar:newToken("%","Percent")
+grammar:newToken("^","Up")
 grammar:newToken(",","Comma")
 grammar:newToken(".","Dot")
+grammar:newToken("..","DotDot")
 grammar:newToken(":","Colon")
 grammar:newToken("(","LeftParen")
 grammar:newToken(")","RightParen")
 grammar:newToken("{","LeftBrace")
 grammar:newToken("}","RightBrace")
+grammar:newToken("[","LeftBrack")
+grammar:newToken("]","RightBrack")
 grammar:newToken(">","Greater")
 grammar:newToken(">=","GreaterEqs")
 grammar:newToken("<","Less")
@@ -185,6 +190,29 @@ grammar:expr(prec.Call, "Dot", {
     end,
 })
 
+grammar:expr(prec.Call, "LeftBrack", {
+    --- @param parser Parser
+    --- @param utils ParserUtils
+    infix=function(parser,utils)
+        local left = table.remove(parser.output,#parser.output)
+        parser:expr()
+        local right = table.remove(parser.output,#parser.output)
+        parser:consume("RightBrack")
+        if utils.canAssign and parser:match("Equals") then
+            parser:expr()
+            table.insert(parser.output, {type="Assignment",value={
+                name=left.value,
+                right=table.remove(parser.output,#parser.output),
+            },col=parser.currIdx,ln=parser.currLn})
+        else
+            table.insert(parser.output, {type="ComputedMember",value={
+                left=left,
+                right=right,
+            },col=parser.currIdx,ln=parser.currLn})
+        end
+    end,
+})
+
 grammar:expr(prec.Call, "LeftParen", {
     --- @param parser Parser
     --- @param utils ParserUtils
@@ -194,6 +222,27 @@ grammar:expr(prec.Call, "LeftParen", {
             left=callee,
             args=parseArgs(parser,false),
         },col=parser.currIdx,ln=parser.currLn})
+    end,
+})
+
+grammar:expr(prec.None, "LeftBrace", {
+    --- @param parser Parser
+    --- @param utils ParserUtils
+    prefix=function(parser,utils)
+        local tbl = {}
+        while parser.curr.t~="RightBrace" and parser.curr.t~="EndOfFile" do
+            parser:consume("Id")
+            local name = parser.prev.val
+            parser:consume("Colon")
+            parser:expr()
+            if parser.curr.t ~= "RightBrace" then
+                parser:consume("Comma")
+            end
+            tbl[name] = table.remove(parser.output,#parser.output)
+        end
+        parser:match("Comma") --? trailing comma
+        parser:consume("RightBrace")
+        table.insert(parser.output, {type="Object",value=tbl,col=parser.currIdx,ln=parser.currLn})
     end,
 })
 
@@ -219,10 +268,13 @@ local function cmp(parser,utils,t)
     table.insert(parser.output, {type="Comparison", value={left=b,right=a,op=op}})
 end
 
-grammar:expr(prec.Term,   "Plus",  {infix=binary})
-grammar:expr(prec.Term,   "Minus", {infix=binary})
-grammar:expr(prec.Factor, "Star",  {infix=binary})
-grammar:expr(prec.Factor, "Slash", {infix=binary})
+grammar:expr(prec.Term,   "Plus",    {infix=binary})
+grammar:expr(prec.Term,   "Minus",   {infix=binary})
+grammar:expr(prec.Factor, "Star",    {infix=binary})
+grammar:expr(prec.Factor, "Slash",   {infix=binary})
+grammar:expr(prec.Factor, "Percent", {infix=binary})
+grammar:expr(prec.Factor, "Up",      {infix=binary})
+grammar:expr(prec.Factor, "DotDot",  {infix=binary})
 grammar:expr(prec.Factor, "Greater",      {infix=cmp})
 grammar:expr(prec.Factor, "GreaterEqs",   {infix=cmp})
 grammar:expr(prec.Factor, "Less",         {infix=cmp})
