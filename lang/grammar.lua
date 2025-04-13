@@ -178,7 +178,7 @@ grammar:expr(prec.Call, "Dot", {
         if utils.canAssign and parser:match("Equals") then
             parser:expr()
             table.insert(parser.output, {type="Assignment",value={
-                name=left.value,
+                name=left,
                 right=table.remove(parser.output,#parser.output),
             },col=parser.currIdx,ln=parser.currLn})
         else
@@ -201,7 +201,10 @@ grammar:expr(prec.Call, "LeftBrack", {
         if utils.canAssign and parser:match("Equals") then
             parser:expr()
             table.insert(parser.output, {type="Assignment",value={
-                name=left.value,
+                name={type="ComputedMember",value={
+                    left=left,
+                    right=right,
+                }},
                 right=table.remove(parser.output,#parser.output),
             },col=parser.currIdx,ln=parser.currLn})
         else

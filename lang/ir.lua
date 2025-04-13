@@ -211,6 +211,8 @@ end
  3: Object creation temporary
  4: .keys()/.values() temporary
  5: Right-hand side of binary expressions
+ 6: Computed member assignment left right
+ 7: Computer member assignment left left
 
 ]]
 
@@ -346,6 +348,12 @@ function Ir:genNode(node, dst)
         end,
         ["Assignment"]=function()
             self:genNode(node.value.right, dst)
+            if node.value.name.type == "ComputedMember" then
+                self:genNode(node.value.name.value.left, "6")
+                self:genNode(node.value.name.value.right, "7")
+                self:output({t="opcode",val=Opcode.TableSet},{t="string",val="{7}"},{t="string",val="6"},{t="string",val='{'..dst..'}'})
+                return
+            end
             self:output({t="opcode",val=Opcode.VarSet},{t="string",val=self:convertId(node.value.name)},{t="any",val='{'..dst..'}'})
         end,
         ["Member"]=function()
