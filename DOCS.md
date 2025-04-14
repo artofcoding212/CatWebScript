@@ -101,6 +101,26 @@ CatWeb comes with a vast amount of things you can do in its block language, and 
         ```
         console.log("a".length()) # 1
         ```
+    * `.sub(start: number, end: number) -> string` Get the substring of the string from the `start` and `end` indexes.\
+    Example:
+        ```
+        console.log("Hi!".sub(2,3)) # i!
+        ```
+    * `.rep(pattern: string, replacement: string) -> string` Replace all occurances of `pattern` with `replacement`.\
+    Example:
+        ```
+        console.log("Hello, CatWebScript!".rep("CatWebScript", "world")) # Hello, world!
+        ```
+    * `.lower() -> string` Enforces all alphabetical characters in the string to be lowercase.\
+    Example:
+        ```
+        console.log("HELLO, WoRLD!".lower()) # hello, world!
+        ```
+    * `.upper() -> string` Enforces all alphabetical characters in the string to be uppercase.\
+    Example:
+        ```
+        console.log("hello, wOrld".upper()) # HELLO, WORLD!
+        ```
 * `table` "library"
     * `Array(...any) -> array<any>` Create a new Array with the given elements.\
     Example:

@@ -3,6 +3,11 @@ fn main(){
         Hello: ", world!"
     }
 
-   hi["foo"] = "hi"
-   console.log(hi["foo"])
+    hi["foo"] = "hi"
+    str = hi["foo"].rep("i","ello").upper() # str = "HELLO"
+    console.log(str.sub(2,str.length())) # ELLO
+    for x,y of hi {
+        console.log(x)
+        console.log(y)
+    }
 }

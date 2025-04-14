@@ -361,6 +361,15 @@ function Parser:consume(type)
     self:adv()
 end
 
+--- @param value string
+--- Errors if the current token is not of the given value and advances.
+function Parser:consumeValue(value)
+    if self.curr.val~=value then
+        self:error(string.format("expected token of value %s, received %s", value, self.curr))
+    end
+    self:adv()
+end
+
 --- @param prec number?
 function Parser:expr(prec)
     prec = prec or 1

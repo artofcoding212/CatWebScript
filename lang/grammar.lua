@@ -116,6 +116,34 @@ grammar:stmt("if", function(parser)
     table.insert(parser.output, ifNode)
 end)
 
+--- @param parser Parser
+grammar:stmt("for", function(parser)
+    parser:consume("Id")
+    local a = parser.prev.val
+    if parser:match("Comma") then --? for x, y of z {}
+        parser:consume("Id")
+        local b = parser.prev.val
+        parser:consumeValue("of")
+        parser:expr()
+        table.insert(parser.output,{
+            type="ForOf", value={
+                a=a,b=b,iterator=table.remove(parser.output,#parser.output),body=parseBlock(parser),
+            },
+        })
+        return
+    end --? for x = start, end {}
+    parser:consume("Equals")
+    parser:expr()
+    local b = table.remove(parser.output,#parser.output)
+    parser:consume("Comma")
+    parser:expr()
+    table.insert(parser.output,{
+        type="For", value={
+            a=a,b=b,c=table.remove(parser.output,#parser.output),body=parseBlock(parser),
+        },
+    })
+end)
+
 --? expressions
 
 local prec = {
